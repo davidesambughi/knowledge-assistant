@@ -7,7 +7,7 @@
 ---
 ## Current Phase
 
-Phase 5 — `05a` (Deploy su Vercel e App Security Headers) completato e verificato live su `https://kb.davidesambughi.dev` (64/64 test, lint, build, HTTPS SSL, HTTP Security Headers OWASP 2026, CNAME Porkbun) — pronti per `05b` (Collegamento Portfolio) e `06` (Learning Synthesis).
+Phase 5 — `05a` (Deploy su Vercel e App Security Headers) completato, smoke test live superato su `https://kb.davidesambughi.dev`. **Non ancora live**: due fix post-05a (CSP `unsafe-eval` prod-only, guardia Content-Length su `/api/chat` — vedi §Completed) sono solo locali, in attesa di push/redeploy. 71/71 test, lint, build puliti in locale. Dopo il push: `05b` (Collegamento Portfolio) e `06` (Learning Synthesis).
 
 ---
 

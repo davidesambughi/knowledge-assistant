@@ -74,11 +74,11 @@ Forma validata della risposta Gemini embeddings (`gemini-embedding-001`, 1536 di
 
 ## Feature Specs (elenco)
 
-Il dettaglio di ciascuna vive nel proprio file in `feature-specs/`, scritto con prompt dedicato seguendo il template — non qui.
+<!-- Lista rimossa (era stale: nomi file non corrispondenti a feature-spec/*.md reali, numerazione
+     ferma a 03). L'elenco autoritativo e aggiornato vive in feature-spec/feature-list.md — non
+     duplicarlo qui, si disallinea silenziosamente ad ogni rinumerazione. -->
 
-1. `01-ingest.md` — script di ingest: legge markdown, chunking (per heading, mermaid mai spezzato), genera embeddings, scrive su `document_chunks`
-2. `02-retrieval.md` — similarity search (naive RAG) + hybrid search (vector + Postgres full-text) come upgrade in scope
-3. `03-chat-ui.md` — chat UI Next.js con Vercel AI SDK, streaming, citazione fonte, rate limit per IP
+Vedi `feature-spec/feature-list.md` per l'elenco completo e aggiornato delle unit, in ordine di build/dipendenza. Il dettaglio di ciascuna vive nel proprio file in `feature-spec/`.
 
 ---
 

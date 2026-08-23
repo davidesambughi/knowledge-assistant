@@ -79,7 +79,8 @@ lib/rag/prompt.ts       costruzione system prompt (funzione pura, Invariant #11/
 lib/rag/generation.ts   wrapper generazione streaming Gemini (gemini-3.1-flash-lite)
 lib/supabase/admin.ts   client Supabase server-only con SUPABASE_SECRET_KEY (bypassa RLS, Invariant #20)
 lib/rate-limit.ts       rate limiting per IP via Upstash Redis (10 req/10 min, Invariant #18)
-lib/security.ts         controllo Origin auto-referenziale e hardening endpoint (03d)
+lib/security.ts         controllo Origin auto-referenziale + guardia Content-Length pre-parsing (03d, post-05a)
+lib/content/overview-panel.ts  contenuto statico bilingue IT/EN del pannello overview (04a)
 lib/chat/messages.ts    trasformazione messaggi useChat -> ChatRequest payload server
 lib/chat/ui-helpers.ts  helper pure UI (es. rilevamento rifiuto guardrail Invariant #11)
 lib/types.ts            tipi condivisi e schemi Zod (Invariant #3/#7)
@@ -87,6 +88,7 @@ components/ui/          shadcn/ui primitive (button, input, scroll-area, badge, 
 components/chat/        componenti dashboard tecnica (header, empty state con chip, message item, input form)
 components/overview/    pannello esplicativo recruiter-facing (04a/04b)
 app/api/chat/route.ts   endpoint di chat, rate-limiting, validation, retrieval, streaming Gemini
+next.config.ts          HTTP security headers (CSP, HSTS, ecc., 05a) + plugin next-intl
 ```
 
 ## Testing Policy

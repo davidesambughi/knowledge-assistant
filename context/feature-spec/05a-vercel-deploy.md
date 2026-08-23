@@ -96,11 +96,11 @@ Nessuna nuova dipendenza npm richiesta.
 
 ## Check When Done
 
-- [ ] `next.config.ts` aggiornato con l'implementazione degli HTTP Security Headers.
-- [ ] Test unitario su `next.config.ts` aggiunto e superato in Vitest (`npm run test`).
-- [ ] `npm run lint` passa senza warning o errori.
-- [ ] `npm run build` passa con successo in locale.
-- [ ] Elenco delle variabili d'ambiente per Vercel preparato e confermato con l'utente.
-- [ ] Deploy su Vercel completato con successo.
-- [ ] Record CNAME su Porkbun configurato e sottodominio `kb.davidesambughi.dev` attivo con HTTPS.
-- [ ] Smoke test su ambiente live superato con esito positivo.
+- [x] `next.config.ts` aggiornato con l'implementazione degli HTTP Security Headers. (Nota post-05a: CSP corretta — `'unsafe-eval'` ristretto a dev only, vedi `progress-tracker.md`.)
+- [x] Test unitario su `next.config.ts` aggiunto e superato in Vitest (`npm run test`).
+- [x] `npm run lint` passa senza warning o errori.
+- [x] `npm run build` passa con successo in locale.
+- [x] Elenco delle variabili d'ambiente per Vercel preparato e confermato con l'utente.
+- [x] Deploy su Vercel completato con successo.
+- [x] Record CNAME su Porkbun configurato e sottodominio `kb.davidesambughi.dev` attivo con HTTPS.
+- [x] Smoke test su ambiente live superato con esito positivo.
