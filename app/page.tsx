@@ -11,6 +11,7 @@ import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatEmptyState } from "@/components/chat/chat-empty-state";
 import { ChatMessageItem } from "@/components/chat/chat-message-item";
 import { ChatInputForm } from "@/components/chat/chat-input-form";
+import { OverviewPanel } from "@/components/overview/overview-panel";
 
 export default function Home() {
   const t = useTranslations("Chat");
@@ -47,44 +48,50 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col flex-1 max-w-3xl mx-auto w-full h-[calc(100vh-2.5rem)] my-5 border border-border bg-card rounded-xl shadow-xs overflow-hidden">
-      <ChatHeader status={status} />
+    <div className="flex flex-col lg:flex-row gap-5 flex-1 max-w-6xl mx-auto w-full my-5 items-start">
+      <div className="flex flex-col flex-1 w-full max-w-3xl mx-auto lg:mx-0 h-[calc(100vh-2.5rem)] border border-border bg-card rounded-xl shadow-xs overflow-hidden">
+        <ChatHeader status={status} />
 
-      <ScrollArea className="flex-1 px-4 py-4">
-        {messages.length === 0 ? (
-          <ChatEmptyState onSelectSampleQuery={handleSelectSampleQuery} />
-        ) : (
-          <div className="flex flex-col gap-4 py-2">
-            {messages.map((message) => (
-              <ChatMessageItem
-                key={message.id}
-                role={message.role as "user" | "assistant"}
-                parts={message.parts}
-                isLastMessage={message === lastMessage}
-                isStreaming={status === "streaming"}
-              />
-            ))}
+        <ScrollArea className="flex-1 px-4 py-4">
+          {messages.length === 0 ? (
+            <ChatEmptyState onSelectSampleQuery={handleSelectSampleQuery} />
+          ) : (
+            <div className="flex flex-col gap-4 py-2">
+              {messages.map((message) => (
+                <ChatMessageItem
+                  key={message.id}
+                  role={message.role as "user" | "assistant"}
+                  parts={message.parts}
+                  isLastMessage={message === lastMessage}
+                  isStreaming={status === "streaming"}
+                />
+              ))}
 
-            {error && (
-              <p className="self-start max-w-[85%] rounded-lg bg-destructive/10 text-destructive px-3.5 py-2 text-xs font-sans">
-                {serverErrorMessage ?? t("streamError")}
-              </p>
-            )}
-            {!error && showEmptyResponseError && (
-              <p className="self-start max-w-[85%] rounded-lg bg-destructive/10 text-destructive px-3.5 py-2 text-xs font-sans">
-                {t("emptyResponseError")}
-              </p>
-            )}
-          </div>
-        )}
-      </ScrollArea>
+              {error && (
+                <p className="self-start max-w-[85%] rounded-lg bg-destructive/10 text-destructive px-3.5 py-2 text-xs font-sans">
+                  {serverErrorMessage ?? t("streamError")}
+                </p>
+              )}
+              {!error && showEmptyResponseError && (
+                <p className="self-start max-w-[85%] rounded-lg bg-destructive/10 text-destructive px-3.5 py-2 text-xs font-sans">
+                  {t("emptyResponseError")}
+                </p>
+              )}
+            </div>
+          )}
+        </ScrollArea>
 
-      <ChatInputForm
-        input={input}
-        setInput={setInput}
-        onSubmit={handleSubmit}
-        isReady={status === "ready"}
-      />
+        <ChatInputForm
+          input={input}
+          setInput={setInput}
+          onSubmit={handleSubmit}
+          isReady={status === "ready"}
+        />
+      </div>
+
+      <div className="w-full max-w-3xl mx-auto lg:mx-0 lg:w-80 lg:shrink-0">
+        <OverviewPanel />
+      </div>
     </div>
   );
 }
