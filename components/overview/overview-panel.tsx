@@ -12,7 +12,7 @@ export function OverviewPanel() {
 
   return (
     <Card className="@container h-full flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs pt-0">
-      <CardHeader className="p-[clamp(0.75rem,2vw,1.25rem)] border-b border-indigo-700/40 bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white shadow-xs">
+      <CardHeader className="p-[clamp(0.75rem,2vw,1.25rem)] border-b border-orange-500/40 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-xs">
         <div className="flex flex-col @xs:flex-row @xs:items-center justify-between gap-2 @xs:gap-3">
           <CardTitle className="text-base font-semibold font-sans text-white">Project Overview</CardTitle>
           <ToggleGroup
@@ -29,7 +29,7 @@ export function OverviewPanel() {
               value="it"
               className={`font-mono text-[11px] font-bold px-2.5 py-1 border-none rounded-sm transition-all ${
                 locale === "it"
-                  ? "bg-white text-indigo-950 shadow-xs"
+                  ? "bg-white text-amber-950 shadow-xs"
                   : "text-white/80 hover:text-white hover:bg-white/20"
               }`}
             >
@@ -39,7 +39,7 @@ export function OverviewPanel() {
               value="en"
               className={`font-mono text-[11px] font-bold px-2.5 py-1 border-none rounded-sm transition-all ${
                 locale === "en"
-                  ? "bg-white text-indigo-950 shadow-xs"
+                  ? "bg-white text-amber-950 shadow-xs"
                   : "text-white/80 hover:text-white hover:bg-white/20"
               }`}
             >
