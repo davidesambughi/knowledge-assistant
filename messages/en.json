@@ -1,0 +1,23 @@
+{
+  "Chat": {
+    "title": "Knowledge Assistant",
+    "subtitle": "Remote NIF Technical Knowledge Engine",
+    "badgeDoc": "Remote NIF Docs",
+    "badgeArchitecture": "Hybrid Search (Vector + FTS RRF)",
+    "badgeGrounding": "Strict In-Corpus Grounding",
+    "welcomeTitle": "Technical Assistant Grounded in Remote NIF Documentation",
+    "welcomeDescription": "Answers strictly from corpus files. If information is not in the documentation, the system explicitly refuses to answer to prevent hallucinations (Invariant #11).",
+    "sampleQueriesHeader": "Sample queries (In-Corpus & Guardrail Test):",
+    "sampleQuery1": "How does webhook handling and signature verification work?",
+    "sampleQuery2": "What are the steps in the Stripe Checkout flows?",
+    "sampleQuery3": "What is the capital of France?",
+    "guardrailTestBadge": "Guardrail Test #11",
+    "sourcesHeader": "Verified Corpus Sources",
+    "guardrailCalloutTitle": "Guardrail Invariant #11 Active",
+    "footerCaption": "Corpus: Remote NIF Docs • Retrieval: Hybrid pgvector (k=5) • Model: Gemini 3.1",
+    "inputPlaceholder": "Ask a question about Remote NIF documentation...",
+    "send": "Send",
+    "emptyResponseError": "Response interrupted or empty — please try again.",
+    "streamError": "Something went wrong. Please try again."
+  }
+}
