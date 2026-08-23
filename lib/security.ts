@@ -21,3 +21,15 @@ export function isAllowedOrigin(originHeader: string | null, requestUrl: string)
     return false;
   }
 }
+
+// Guardia early sulla dimensione del body dichiarata (OWASP LLM10 — Unbounded Consumption),
+// verificata prima di bufferizzare/parsare la richiesta in app/api/chat/route.ts. Funzione pura:
+// isola solo il confronto/parsing numerico, non l'accesso a req.headers (I/O), per restare testabile.
+// Content-Length assente (null) non viene mai considerato oversized qui — un client senza questo
+// header (o con transfer-encoding chunked) non deve essere bloccato da questo controllo: resta comunque
+// vincolato dal limite definitivo di ChatRequestSchema dopo il parsing.
+export function isOversizedContentLength(contentLength: string | null, maxBytes: number): boolean {
+  if (contentLength === null) return false;
+  const parsed = Number(contentLength);
+  return Number.isFinite(parsed) && parsed > maxBytes;
+}

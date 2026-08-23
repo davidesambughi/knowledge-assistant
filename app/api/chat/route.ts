@@ -7,7 +7,12 @@ import { ChatRequestSchema, TOTAL_LENGTH_ISSUE_TAG } from "@/lib/types";
 import { hybridRetrieveChunks } from "@/lib/rag/retrieval";
 import { resolveChatStream, streamChatResponse } from "@/lib/rag/generation";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import { isAllowedOrigin } from "@/lib/security";
+import { isAllowedOrigin, isOversizedContentLength } from "@/lib/security";
+
+// Ordini di grandezza sotto il limite piattaforma Vercel (100MB) ma generosa rispetto a
+// MAX_TOTAL_REQUEST_LENGTH (12.000 caratteri) per l'overhead JSON (virgolette, chiavi, escape)
+// e UTF-8 multi-byte.
+const MAX_BODY_BYTES = 20_000;
 
 // Un superamento di questi due limiti (a differenza di un payload semplicemente malformato) è il
 // segnale di abuso più concreto secondo la ricerca di 03d-security-review.md (LLM10) — loggato
@@ -42,6 +47,21 @@ export async function POST(req: Request) {
   // economico va sempre per primo), prima del parsing del body.
   if (!isAllowedOrigin(req.headers.get("origin"), req.url)) {
     return Response.json({ error: "Origine non consentita." }, { status: 403 });
+  }
+
+  // Guardia early su Content-Length (OWASP LLM10 — Unbounded Consumption) prima di bufferizzare/
+  // parsare il body: senza `proxy.ts` (non presente in questo progetto), Next.js non impone alcun
+  // limite di dimensione sulle Route Handler — la piattaforma Vercel accetta fino a 100MB per
+  // richiesta. Senza questo controllo, un payload enorme verrebbe comunque interamente bufferizzato
+  // e parsato da req.json() (costo CPU/memoria) prima che ChatRequestSchema lo rifiuti per lunghezza.
+  // Difesa in profondità, non una garanzia assoluta (vedi isOversizedContentLength): il vincolo
+  // definitivo resta ChatRequestSchema più sotto.
+  if (isOversizedContentLength(req.headers.get("content-length"), MAX_BODY_BYTES)) {
+    console.warn("[chat] oversized request rejected (content-length)", {
+      ip,
+      contentLength: req.headers.get("content-length"),
+    });
+    return Response.json({ error: "Richiesta troppo grande." }, { status: 413 });
   }
 
   let body: unknown;

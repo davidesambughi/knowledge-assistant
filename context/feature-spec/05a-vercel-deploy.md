@@ -16,6 +16,7 @@ Usa lo schema Zod `EnvSchema` definito in `tech-spec.md` §Data Models — non r
 
 Questa unit aggiunge la configurazione degli HTTP Security Headers a `next.config.ts`.
 Testare con Vitest:
+
 - Test unitario su `next.config.ts` per verificare che la funzione `headers()` restituisca gli header di sicurezza obbligatori (`Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Strict-Transport-Security`) applicati alla rotta `/:path*`.
 
 ---
@@ -57,11 +58,11 @@ Testare con Vitest:
 3. **Guida al Deploy su Vercel (Esecuzione Utente)**:
    - Accedere alla dashboard di Vercel ([vercel.com](https://vercel.com)).
    - Importare il repository GitHub `davidesambughi/knowledge-assistant`.
-   - Inserire le variabili d'ambiente di produzione registrate al punto 2 nella sezione *Environment Variables*.
+   - Inserire le variabili d'ambiente di produzione registrate al punto 2 nella sezione _Environment Variables_.
    - Avviare il primo deploy di produzione.
 
 4. **Configurazione Custom Subdomain su Porkbun (Esecuzione Utente)**:
-   - Nella sezione *Settings* -> *Domains* del progetto Vercel, aggiungere il sottodominio (es. `kb.davidesambughi.dev`).
+   - Nella sezione _Settings_ -> _Domains_ del progetto Vercel, aggiungere il sottodominio (es. `kb.davidesambughi.dev`).
    - Copiare le istruzioni DNS fornite da Vercel (record `CNAME` con valore `cname.vercel-dns.com`).
    - Accedere al pannello DNS di Porkbun per il dominio `davidesambughi.dev` e aggiungere il record CNAME corrispondente:
      - **Type**: `CNAME`

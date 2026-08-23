@@ -5,12 +5,17 @@ import createNextIntlPlugin from "next-intl/plugin";
 // verificato in node_modules/next-intl/dist/esm/*/plugin/getNextConfig.js).
 const withNextIntl = createNextIntlPlugin();
 
+// 'unsafe-eval' serve solo in sviluppo (React usa eval per ricostruire gli stack trace
+// server-side nel browser) — né React né Next.js lo usano in produzione di default.
+// Verificato in node_modules/next/dist/docs/01-app/02-guides/content-security-policy.md.
+const isDev = process.env.NODE_ENV === "development";
+
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
