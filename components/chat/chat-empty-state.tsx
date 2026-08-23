@@ -30,7 +30,7 @@ export function ChatEmptyState({ onSelectSampleQuery }: ChatEmptyStateProps) {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[340px] p-6 text-center max-w-xl mx-auto my-auto gap-6">
+    <div className="flex-1 flex flex-col items-center justify-center py-[clamp(1rem,3vw,2rem)] px-[clamp(0.75rem,2vw,1.5rem)] text-center max-w-xl mx-auto my-auto gap-[clamp(1rem,2.5vw,1.5rem)]">
       <div className="flex flex-col items-center gap-3">
         <div className="p-3 rounded-xl bg-muted border border-border text-foreground">
           <FileText className="size-6 text-muted-foreground" />

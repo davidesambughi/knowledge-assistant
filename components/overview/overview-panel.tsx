@@ -11,10 +11,10 @@ export function OverviewPanel() {
   const [locale, setLocale] = useState<Locale>("en");
 
   return (
-    <Card className="lg:sticky lg:top-5">
-      <CardHeader>
-        <div className="flex items-center justify-between gap-3">
-          <CardTitle>Project Overview</CardTitle>
+    <Card className="@container h-full flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xs pt-0">
+      <CardHeader className="p-[clamp(0.75rem,2vw,1.25rem)] border-b border-indigo-700/40 bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white shadow-xs">
+        <div className="flex flex-col @xs:flex-row @xs:items-center justify-between gap-2 @xs:gap-3">
+          <CardTitle className="text-base font-semibold font-sans text-white">Project Overview</CardTitle>
           <ToggleGroup
             variant="outline"
             size="sm"
@@ -23,18 +23,33 @@ export function OverviewPanel() {
               const next = value[0];
               if (next === "it" || next === "en") setLocale(next);
             }}
+            className="self-start @xs:self-auto shrink-0 bg-black/25 border border-white/30 rounded-md p-0.5"
           >
-            <ToggleGroupItem value="it" className="font-mono text-[11px]">
+            <ToggleGroupItem
+              value="it"
+              className={`font-mono text-[11px] font-bold px-2.5 py-1 border-none rounded-sm transition-all ${
+                locale === "it"
+                  ? "bg-white text-indigo-950 shadow-xs"
+                  : "text-white/80 hover:text-white hover:bg-white/20"
+              }`}
+            >
               IT
             </ToggleGroupItem>
-            <ToggleGroupItem value="en" className="font-mono text-[11px]">
+            <ToggleGroupItem
+              value="en"
+              className={`font-mono text-[11px] font-bold px-2.5 py-1 border-none rounded-sm transition-all ${
+                locale === "en"
+                  ? "bg-white text-indigo-950 shadow-xs"
+                  : "text-white/80 hover:text-white hover:bg-white/20"
+              }`}
+            >
               EN
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-5">
+      <CardContent className="flex-1 p-[clamp(0.75rem,2vw,1.25rem)] flex flex-col gap-[clamp(0.75rem,2vw,1.25rem)] overflow-y-auto">
         <p className="text-xs text-muted-foreground leading-relaxed font-sans">
           {OVERVIEW_INTRO[locale]}
         </p>

@@ -85,6 +85,7 @@ lib/chat/ui-helpers.ts  helper pure UI (es. rilevamento rifiuto guardrail Invari
 lib/types.ts            tipi condivisi e schemi Zod (Invariant #3/#7)
 components/ui/          shadcn/ui primitive (button, input, scroll-area, badge, card, avatar)
 components/chat/        componenti dashboard tecnica (header, empty state con chip, message item, input form)
+components/overview/    pannello esplicativo recruiter-facing (04a/04b)
 app/api/chat/route.ts   endpoint di chat, rate-limiting, validation, retrieval, streaming Gemini
 ```
 

@@ -16,6 +16,7 @@ import { OverviewPanel } from "@/components/overview/overview-panel";
 export default function Home() {
   const t = useTranslations("Chat");
   const [input, setInput] = useState("");
+  const [mobileTab, setMobileTab] = useState<"chat" | "overview">("chat");
 
   const { messages, sendMessage, status, error } = useChat({
     transport: new TextStreamChatTransport({
@@ -48,11 +49,42 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-5 flex-1 max-w-6xl mx-auto w-full my-5 items-start">
-      <div className="flex flex-col flex-1 w-full max-w-3xl mx-auto lg:mx-0 h-[calc(100vh-2.5rem)] border border-border bg-card rounded-xl shadow-xs overflow-hidden">
+    <div className="flex flex-col lg:flex-row gap-[clamp(0.75rem,2vw,1.5rem)] flex-1 max-w-7xl mx-auto w-full p-[clamp(0.625rem,2vw,1.25rem)] min-h-dvh items-stretch">
+      {/* Segmented Control per schermi mobile (< lg) */}
+      <div className="flex lg:hidden w-full p-1 bg-muted/80 rounded-lg border border-border shrink-0 gap-1">
+        <button
+          type="button"
+          onClick={() => setMobileTab("chat")}
+          className={`flex-1 py-1.5 px-3 rounded-md text-xs font-mono font-medium transition-colors ${
+            mobileTab === "chat"
+              ? "bg-background text-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Assistant Chat
+        </button>
+        <button
+          type="button"
+          onClick={() => setMobileTab("overview")}
+          className={`flex-1 py-1.5 px-3 rounded-md text-xs font-mono font-medium transition-colors ${
+            mobileTab === "overview"
+              ? "bg-background text-foreground shadow-xs"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          Overview Panel
+        </button>
+      </div>
+
+      {/* Colonna Chat */}
+      <div
+        className={`flex flex-col flex-1 w-full max-w-4xl mx-auto lg:mx-0 h-[calc(100dvh-5.5rem)] lg:h-[calc(100dvh-2.5rem)] border border-border bg-card rounded-xl shadow-xs overflow-hidden ${
+          mobileTab === "chat" ? "flex" : "hidden lg:flex"
+        }`}
+      >
         <ChatHeader status={status} />
 
-        <ScrollArea className="flex-1 px-4 py-4">
+        <ScrollArea className="flex-1 px-[clamp(0.75rem,2vw,1.25rem)] py-[clamp(0.75rem,2vw,1.25rem)]">
           {messages.length === 0 ? (
             <ChatEmptyState onSelectSampleQuery={handleSelectSampleQuery} />
           ) : (
@@ -89,7 +121,12 @@ export default function Home() {
         />
       </div>
 
-      <div className="w-full max-w-3xl mx-auto lg:mx-0 lg:w-80 lg:shrink-0">
+      {/* Colonna Overview Panel */}
+      <div
+        className={`w-full max-w-4xl mx-auto lg:mx-0 lg:w-80 xl:w-90 lg:shrink-0 h-[calc(100dvh-5.5rem)] lg:h-[calc(100dvh-2.5rem)] overflow-y-auto rounded-xl ${
+          mobileTab === "overview" ? "block" : "hidden lg:block"
+        }`}
+      >
         <OverviewPanel />
       </div>
     </div>

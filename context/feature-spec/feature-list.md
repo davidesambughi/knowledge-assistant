@@ -88,7 +88,10 @@ _Dipendenza: 03a/03d (route e gestione errori esistenti). Da rifinire (dettaglio
   Pannello esplicativo in colonna (destra o sinistra, da decidere in fase di design — layout attuale è a singola colonna) accanto alla chat: cos'è il progetto in linguaggio semplice + punti tecnici principali (chunking, hybrid search, guardrail Invariant #11, rate limiting, stack) per chi legge da ingegnere. Contenuto derivato da `project-overview.md`/`progress-tracker.md`, non reinventato. Nessuna nuova pipeline dati — solo presentazione statica.
   **Eccezione bilingue (confermata 2026-08-23):** solo questo pannello è bilingue IT/EN (proprio switch/testo dedicato) — non è un ripristino di `LocaleSwitch`/`03h`, che resta rimosso: il resto della UI (chat, header) resta fisso in inglese.
 
-_Dipendenza: 03h (UI corrente stabile). Da rifinire in una feature-spec dedicata prima dell'implementazione — incluso come implementare lo switch bilingue solo per questo pannello senza reintrodurre `next-intl` a livello di UI generale._
+- **04b — Fluid responsiveness & mobile tab switcher**
+  Audit e refactoring della responsiveness per eliminare misure rigide e `100vh` in favore di dynamic viewport units (`dvh`), container queries nativi Tailwind v4 (`@container`) e Mobile Tab Switcher ("Chat" | "Overview Panel" per schermi `< lg`).
+
+_Dipendenza: 03h (UI corrente stabile). 04b dipende da 04a._
 
 ---
 
