@@ -40,7 +40,7 @@ Phase 4 — `04a` (Overview Panel) e `04b` (Fluid Responsiveness & Restyling) co
 
 ## In Progress
 
-- None yet.
+- `05a — Deploy su Vercel e App Security Headers` — Implementazione Security Headers in `next.config.ts` (`poweredByHeader: false`, OWASP 2026 CSP, `frame-ancestors 'none'`, `X-Frame-Options: DENY`, HSTS, `Permissions-Policy`) e unit test `next.config.test.ts` completati (64/64 test passati, `npm run lint` e `npm run build` puliti). In corso: guida al deploy su Vercel e record CNAME Porkbun (`kb.davidesambughi.dev`). Spec: `context/feature-spec/05a-vercel-deploy.md`.
 
 ---
 
