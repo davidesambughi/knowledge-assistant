@@ -7,13 +7,13 @@
 ---
 ## Current Phase
 
-Phase 5 — `05a` (Deploy su Vercel e App Security Headers) completato, smoke test live superato su `https://kb.davidesambughi.dev`. I due fix post-05a (CSP `unsafe-eval` prod-only, guardia Content-Length su `/api/chat` — vedi §Completed) sono stati **pushati e sono live** (commit `5757e5e`, 2026-09-01). 71/71 test, lint, build puliti. `05b` (Collegamento Portfolio) parzialmente fatto: subdomain `kb.davidesambughi.dev` collegato dal project-detail di Remote NIF, ma manca una via di ritorno al portfolio dalla pagina del tool (nessun link "back", solo freccia browser) — vedi §Next Up. Poi `06` (Learning Synthesis).
+Phase 5 — `05a` e `05b` completati, live su `https://kb.davidesambughi.dev`. I fix di sicurezza post-05a sono pushati e live (commit `5757e5e`, 2026-09-01). Sessione 2026-09-01: link `← Portfolio` nell'header, fix bug layout chat lunga, riscrittura testo pannello overview (commit `41f550d`), harness test grounding + risultati (`fb086ba`/`180d3c8`). Grounding testato a fondo → solido (vedi §Test grounding). 71/71 test, lint, build puliti. **Aperto**: errore di hydration da `.next` stale dopo gli edit di sessione — si risolve con restart pulito del dev server (`rm -rf .next` + `npm run dev`), nessun bug di codice. Prossimo: `06` (Learning Synthesis).
 
 ---
 
 ## Current Goal
 
-`05b — Collegamento portfolio` (`feature-list.md`). Link dal project-detail di Remote NIF sul portfolio principale.
+`06 — Learning Synthesis` (`feature-list.md`). Sintesi delle decisioni architetturali per portfolio/colloqui — bozza in `context/note-colonna-testo.md` (5 blocchi). Non-code: verifica il Success Criteria di `project-overview.md` (rispiegare ogni decisione chiave senza guardare il codice).
 
 ---
 
@@ -58,7 +58,8 @@ Phase 5 — `05a` (Deploy su Vercel e App Security Headers) completato, smoke te
 - `05b` — Collegamento portfolio. Link dal project-detail di Remote NIF → tool: **FATTO** (subdomain `kb.davidesambughi.dev`). Via di ritorno al portfolio dal tool: **FATTO** (vedi §Completed → "05b — Link back al portfolio").
 - `06` — Learning Synthesis (sintesi decisioni architetturali per portfolio/colloqui).
 
-- **Bug layout chat lunga** — RISOLTO (2026-09-01). Causa: `ScrollArea` in `app/page.tsx` era un flex child con `min-height:auto` di default, quindi `flex-1` non poteva comprimerla sotto l'altezza del contenuto — con chat lunga cresceva oltre la colonna (`overflow-hidden`) e spingeva `ChatInputForm` fuori dal viewport, invece di scrollare internamente. Fix: `min-h-0` sulla `ScrollArea` + `shrink-0` difensivo su `chat-header.tsx` e `chat-input-form.tsx`. Riprodotto e verificato in browser reale (dev server): con contenuto alto simulato, prima `form_visible:false` / viewport non scrollabile → dopo `form_visible:true` / scroll interno funzionante (`scrollHeight 2422 > clientHeight 625`). File di unit chiuse toccati (`03b`/`03e`): solo aggiunta di utility class, nessun fix/deviazione pregressa non dichiarata.
+- **05b — Link back al portfolio** — FATTO (2026-09-01, commit `41f550d`). Link `← Portfolio` in `chat-header.tsx` → `https://davidesambughi.dev`, stile shadcn `buttonVariants` ghost/xs, stessa tab. Chiave i18n `Chat.backToPortfolio`. Nessuna mini-spec (task piccolo, isolato — criterio `03h`). Con questo `05b` è chiuso (link portfolio→tool via subdomain già fatto, ora anche tool→portfolio).
+- **Bug layout chat lunga** — RISOLTO (2026-09-01, commit `41f550d`). Causa: `ScrollArea` in `app/page.tsx` era un flex child con `min-height:auto` di default, quindi `flex-1` non poteva comprimerla sotto l'altezza del contenuto — con chat lunga cresceva oltre la colonna (`overflow-hidden`) e spingeva `ChatInputForm` fuori dal viewport, invece di scrollare internamente. Fix: `min-h-0` sulla `ScrollArea` + `shrink-0` difensivo su `chat-header.tsx` e `chat-input-form.tsx`. Riprodotto e verificato in browser reale (dev server): con contenuto alto simulato, prima `form_visible:false` / viewport non scrollabile → dopo `form_visible:true` / scroll interno funzionante (`scrollHeight 2422 > clientHeight 625`). File di unit chiuse toccati (`03b`/`03e`): solo aggiunta di utility class, nessun fix/deviazione pregressa non dichiarata.
 - **Pannello overview riscritto** — FATTO (2026-09-01). `lib/content/overview-panel.ts`: i 5 punti passati da etichetta generica a decisione + perché rispetto alle alternative, IT/EN. Chunking → structural vs fixed-size+overlap, fence-aware; Hybrid → cosine + FTS via RRF lato SQL, esempio "Idempotency" fuori top-100 vettoriale; Grounding → system prompt a tag XML come canale non-hard, hardening multi-livello; Rate limiting → sliding vs fixed window vs token bucket; Zod → i 3 limiti + worst-case 160k char. Metriche/limiti verificati contro progress-tracker. Nessun test (contenuto statico), lint/build/71 test invariati. Verificato in browser: pannello renderizza e scrolla internamente.
 
 ### Test grounding — ESEGUITI 2026-09-01 (esito: solido)
