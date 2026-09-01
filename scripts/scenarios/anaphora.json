@@ -1,0 +1,8 @@
+{
+  "_comment": "Follow-up anaforici: il retrieval usa SOLO l'ultimo messaggio utente come query, quindi 'the second one' / 'that' recuperano chunk deboli. Pass = il modello o chiede di riformulare o risponde solo da chunk pertinenti realmente recuperati; NON inventa e NON si appoggia alla sola history.",
+  "turns": [
+    "What are the main security considerations in the architecture?",
+    "Tell me more about the second one.",
+    "And how does that relate to how files are stored?"
+  ]
+}

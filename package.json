@@ -10,7 +10,9 @@
     "test": "vitest run",
     "ingest:preview": "tsx --env-file=.env.local lib/rag/ingest.ts --preview",
     "ingest": "tsx --env-file=.env.local lib/rag/ingest.ts",
-    "retrieval:preview": "tsx --env-file=.env.local lib/rag/retrieval-preview.ts"
+    "retrieval:preview": "tsx --env-file=.env.local lib/rag/retrieval-preview.ts",
+    "probe": "tsx --env-file=.env.local scripts/grounding-probe.ts",
+    "ratelimit:reset": "tsx --env-file=.env.local scripts/reset-ratelimit.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.44",
