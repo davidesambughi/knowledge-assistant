@@ -21,7 +21,7 @@ export function ChatInputForm({
   const t = useTranslations("Chat");
 
   return (
-    <div className="flex flex-col gap-2 p-[clamp(0.75rem,2vw,1rem)] border-t border-indigo-700/40 bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white shadow-xs">
+    <div className="shrink-0 flex flex-col gap-2 p-[clamp(0.75rem,2vw,1rem)] border-t border-indigo-700/40 bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white shadow-xs">
       <form onSubmit={onSubmit} className="flex items-center gap-2">
         <Input
           value={input}

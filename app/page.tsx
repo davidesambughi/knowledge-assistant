@@ -84,7 +84,10 @@ export default function Home() {
       >
         <ChatHeader status={status} />
 
-        <ScrollArea className="flex-1 px-[clamp(0.75rem,2vw,1.25rem)] py-[clamp(0.75rem,2vw,1.25rem)]">
+        {/* min-h-0: senza, il flex child ScrollArea ha min-height:auto e non si comprime
+            sotto l'altezza del contenuto — con chat lunga cresce oltre la colonna e spinge
+            la barra input fuori dal viewport, invece di scrollare internamente. */}
+        <ScrollArea className="flex-1 min-h-0 px-[clamp(0.75rem,2vw,1.25rem)] py-[clamp(0.75rem,2vw,1.25rem)]">
           {messages.length === 0 ? (
             <ChatEmptyState onSelectSampleQuery={handleSelectSampleQuery} />
           ) : (

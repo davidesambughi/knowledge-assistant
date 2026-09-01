@@ -3,6 +3,7 @@
     "title": "Knowledge Assistant",
     "subtitle": "Remote NIF Technical Knowledge Engine",
     "badgeDoc": "Remote NIF Docs",
+    "backToPortfolio": "Portfolio",
     "badgeArchitecture": "Hybrid Search (Vector + FTS RRF)",
     "badgeGrounding": "Strict In-Corpus Grounding",
     "welcomeTitle": "Technical Assistant Grounded in Remote NIF Documentation",
