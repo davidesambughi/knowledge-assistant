@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Font libero (Google Fonts) — non Google Sans, proprietario e non licenziabile.
@@ -35,6 +36,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        {/* Vercel Web Analytics: in produzione carica /_vercel/insights/script.js (stessa origine,
+            compatibile con la CSP "script-src 'self'" di next.config.ts); in dev non traccia. */}
+        <Analytics />
       </body>
     </html>
   );
